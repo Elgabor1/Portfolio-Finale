@@ -12,6 +12,7 @@
     --border-color: #ddd;
     --header-bg-color: rgba(255, 255, 255, 0.95);
     --shadow-color: rgba(0, 0, 0, 0.1);
+    --header-height: 70px; /* Define header height for reuse */
 }
 
 body.dark-mode {
@@ -101,6 +102,7 @@ a:hover {
     z-index: 1000;
     box-shadow: 0 2px 10px var(--shadow-color);
     width: 100%;
+    height: var(--header-height);
 }
 
 .logo {
@@ -168,6 +170,12 @@ body.dark-mode .theme-toggle .fa-moon { display: none; }
 section {
     margin-bottom: 2rem;
 }
+
+/* NEW: Fix for anchor links being hidden by sticky header */
+section[id] {
+    scroll-margin-top: calc(var(--header-height) + 20px);
+}
+
 
 .profile-images {
     display: flex;
@@ -368,7 +376,12 @@ section {
         margin: 1rem;
     }
     
+    /* REMOVED rule that was hiding the slogan */
+}
+
+/* Optional: for very small screens, hide slogan if it wraps badly */
+@media (max-width: 400px) {
     .logo-slogan {
-        display: none; /* Hide slogan on small screens */
+        display: none;
     }
 }

@@ -9,10 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Responsive Navigation Menu ---
     if (menuToggle && navMenu) {
+        // Toggle menu on hamburger click
         menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             const isExpanded = navMenu.classList.contains('active');
             menuToggle.setAttribute('aria-expanded', isExpanded);
+        });
+
+        // NEW: Close menu when a link is clicked
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
         });
     }
 
